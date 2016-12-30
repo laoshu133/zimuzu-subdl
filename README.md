@@ -1,5 +1,8 @@
 # zimuzu-subdl
 
+[![npm version](https://img.shields.io/npm/v/zimuzu-subdl.svg?style=flat-square)](https://www.npmjs.org/package/zimuzu-subdl)
+[![build status](https://img.shields.io/travis/laoshu133/zimuzu-subdl.svg?style=flat-square)](https://travis-ci.org/laoshu133/zimuzu-subdl)
+
 字幕组（人人影视）字幕批量下载工具
 
 ## 安装
