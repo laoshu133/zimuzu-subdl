@@ -47,4 +47,11 @@ describe('Test CLI', () => {
             stdout.should.to.contain('操作完成');
         });
     });
+
+    it('Test <Man of Steel> use [-u]', () => {
+        return exec(`${cli} -u 'http://www.zimuzu.tv/search?keyword=%E8%B6%85%E4%BA%BA+%E9%92%A2%E9%93%81&type=subtitle' -o ${testOutput}`)
+        .then(stdout => {
+            stdout.should.to.contain('操作完成');
+        });
+    });
 });
