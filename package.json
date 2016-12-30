@@ -1,6 +1,6 @@
 {
   "name": "zimuzu-subdl",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ZiMuZu sub download tool",
   "main": "index.js",
   "scripts": {
