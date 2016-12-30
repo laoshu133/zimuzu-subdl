@@ -60,7 +60,9 @@ let url = URL.parse(emptyUrl, true);
 
 let key = program.key;
 if(!key && program.url) {
-    key = URL.parse(program.url, true).query.key;
+    let query = URL.parse(program.url, true).query;
+
+    key = query.keyword || query.key;
 }
 
 if(!key) {
