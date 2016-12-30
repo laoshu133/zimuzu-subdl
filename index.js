@@ -14,6 +14,8 @@ const Promise = require('bluebird');
 const program = require('commander');
 const writeFile = Promise.promisify(fs.writeFile);
 
+const downloadConcurrency = 4;
+
 const log = function(type, msg, ...args) {
     let log = console.log;
     let color;
@@ -92,26 +94,28 @@ Promise.try(() => {
 
     return urls;
 })
-.map(path => {
+.mapSeries((path, idx) => {
     let subUrl = URL.format({
         protocol: url.protocol,
         host: url.host,
         pathname: path
     });
 
+    log('info', '正在解析第 %d 个字幕', idx + 1);
+
     return axios.get(subUrl);
 })
 .map((res, idx) => {
     const rUrl = /<div\s+class="subtitle-links[^"]*">[\s\S]*?<a\s+href="([^"]+)"[^>]+>([^<]+)/;
 
-    log('info', '正在解析第 %d 个字幕', idx + 1);
-
     if(rUrl.test(res.data)) {
         let subUrl = RegExp.$1;
         let name = RegExp.$2;
 
-        return axios.get({
-            url: subUrl,
+        let msg = '正在下载第 %d 个字幕： %s';
+        log('info', msg, idx + 1, name);
+
+        return axios.get(subUrl, {
             responseType: 'blob'
         })
         .then(res => {
@@ -122,9 +126,13 @@ Promise.try(() => {
         });
     }
 
+    log('warn', '第 %d 个字幕解析失败', idx + 1);
+
     return null;
+}, {
+    concurrency: downloadConcurrency
 })
-.map((data, idx) => {
+.mapSeries((data, idx) => {
     if(!data) {
         log('error', '第 %d 个字幕下载失败', idx + 1);
 
@@ -138,7 +146,7 @@ Promise.try(() => {
 })
 .then(subs => {
     let errSubs = subs.filter(sub => {
-        return !!sub;
+        return !sub;
     });
 
     let msg = '操作完成，共下载了 %d 个字幕';
