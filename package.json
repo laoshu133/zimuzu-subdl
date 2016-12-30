@@ -1,0 +1,27 @@
+{
+  "name": "zimuzu-subdl",
+  "version": "0.0.1",
+  "description": "ZiMuZu sub download tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/laoshu133/zimuzu-subdl.git"
+  },
+  "keywords": [
+    "zimuzu",
+    "yyets",
+    "sub"
+  ],
+  "author": "xiaomi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laoshu133/zimuzu-subdl/issues"
+  },
+  "homepage": "https://github.com/laoshu133/zimuzu-subdl#readme",
+  "dependencies": {
+    "axios": "^0.15.3"
+  }
+}
