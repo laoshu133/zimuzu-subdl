@@ -30,6 +30,11 @@
 ## 命令行参数
 
 ```
+-h, --help              output usage information
+-V, --version           output the version number
+-o, --output [path]     指定输出目录
+-k, --key [keyword]     指定关键字下载
+-u, --url [search url]  指定搜索URL 下载
 ```
 
 ## License
