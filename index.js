@@ -123,7 +123,7 @@ Promise.try(() => {
         log('info', msg, idx + 1, name);
 
         return axios.get(subUrl, {
-            responseType: 'blob'
+            responseType: 'arraybuffer'
         })
         .then(res => {
             return {
