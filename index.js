@@ -6,13 +6,13 @@
  * @author xiaomi
  */
 
-const fs = require('fs');
 const URL = require('url');
+const path = require('path');
 const axios = require('axios');
 const chalk = require('chalk');
 const Promise = require('bluebird');
 const program = require('commander');
-const writeFile = Promise.promisify(fs.writeFile);
+const fs = require('fs-extra-promise');
 
 const downloadConcurrency = 4;
 
@@ -42,6 +42,7 @@ const log = function(type, msg, ...args) {
 
 program
     .version(require('./package.json').version)
+    .option('-o, --output [path]', '指定输出目录')
     .option('-k, --key [keyword]', '指定关键字下载')
     .option('-u, --url [search url]', '指定搜索URL 下载')
     .parse(process.argv);
@@ -49,6 +50,10 @@ program
 if(!process.argv.slice(2).length) {
     program.outputHelp();
 }
+
+const output = program.output
+    ? program.output
+    : process.cwd();
 
 let emptyUrl = 'http://www.zimuzu.tv/search?type=subtitle&keyword=';
 let url = URL.parse(emptyUrl, true);
@@ -141,8 +146,12 @@ Promise.try(() => {
 
     log('info', '正在写入第 %d 个字幕', idx + 1);
 
-    return writeFile(data.name, data.buffer)
-        .return(data);
+    let p = path.join(output, data.name);
+
+    return fs.writeFileAsync(p, data.buffer)
+    .then(() => {
+        return data;
+    });
 })
 .then(subs => {
     let errSubs = subs.filter(sub => {
