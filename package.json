@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/laoshu133/zimuzu-subdl#readme",
   "dependencies": {
-    "axios": "^0.15.3"
+    "axios": "^0.15.3",
+    "bluebird": "^3.4.7",
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0"
   }
 }
