@@ -23,6 +23,7 @@ describe('Test CLI', () => {
         });
     };
 
+    const cli = 'node index.js';
     const testOutput = '_test_out';
 
     before(() => {
@@ -34,14 +35,14 @@ describe('Test CLI', () => {
     });
 
     it('Test help', () => {
-        return exec('zimuzu-subdl -h')
+        return exec(`${cli} -h`)
         .then(stdout => {
             stdout.should.to.contain('-k, --key');
         });
     });
 
-    it('Test Westworld S01', () => {
-        return exec('zimuzu-subdl -k "西部世界 第1季" -o ' + testOutput)
+    it('Test <Man of Steel>', () => {
+        return exec(`${cli} -k "超人 钢铁" -o ${testOutput}`)
         .then(stdout => {
             stdout.should.to.contain('操作完成');
         });

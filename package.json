@@ -4,7 +4,7 @@
   "description": "ZiMuZu sub download tool",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -s 1000 -t 20000"
   },
   "bin": {
     "zimuzu-subdl": "./index.js"
