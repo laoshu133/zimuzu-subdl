@@ -148,7 +148,7 @@ Promise.try(() => {
 
     let p = path.join(output, data.name);
 
-    return fs.writeFileAsync(p, data.buffer)
+    return fs.outputFileAsync(p, data.buffer)
     .then(() => {
         return data;
     });
